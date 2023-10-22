@@ -5,7 +5,7 @@ import { DB_CONNECTIONS } from '../../config/constants';
 import { User } from '../entities';
 
 @Injectable()
-export class UserRepository extends Repository<User> {
+export class UserAuthRepository extends Repository<User> {
   constructor(
     @InjectRepository(User, DB_CONNECTIONS.MAIN)
     dataAccess: Repository<User>,

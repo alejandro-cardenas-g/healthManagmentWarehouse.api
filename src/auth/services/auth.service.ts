@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import { SignInUserDto } from '../dto';
 import { IAuthUser, IJwtPayload } from '../interfaces';
-import { UserRepository } from '../repositories';
+import { UserAuthRepository } from '../repositories';
 import { TokenService } from './token.service';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(
     private readonly configService: ConfigService,
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UserAuthRepository,
     private readonly jwtService: JwtService,
     private readonly tokenService: TokenService,
   ) {}

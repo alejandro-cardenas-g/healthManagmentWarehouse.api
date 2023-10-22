@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { IJwtPayload } from '../interfaces';
 import { ISecrets } from '../interfaces/secrets.interface';
-import { UserRepository } from '../repositories';
+import { UserAuthRepository } from '../repositories';
 
 @Injectable()
 export class TokenService {
@@ -13,7 +13,7 @@ export class TokenService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UserAuthRepository,
   ) {}
 
   getAccessToken(payload: IJwtPayload) {

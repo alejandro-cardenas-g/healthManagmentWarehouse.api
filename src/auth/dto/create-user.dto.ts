@@ -12,6 +12,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { EAllowedPermissions } from '../constants/permissions.constant';
+import { Transform } from 'class-transformer';
 
 export class CreateUserDto {
   @IsString()
@@ -25,6 +26,9 @@ export class CreateUserDto {
   @IsString()
   @IsEmail()
   @IsNotEmpty()
+  @Transform((v) =>
+    typeof v.value === 'string' ? v.value.toLowerCase() : v.value,
+  )
   email: string;
 
   @IsString()

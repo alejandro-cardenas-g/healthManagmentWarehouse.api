@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { IAuthUser } from '../interfaces';
-import { UserRepository } from '../repositories';
+import { UserAuthRepository } from '../repositories';
 import { TokenService } from '../services/token.service';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class CookieAuthGuard implements CanActivate {
   constructor(
     private readonly configService: ConfigService,
     private readonly tokenService: TokenService,
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UserAuthRepository,
   ) {
     this.cookieName = this.configService.getOrThrow<string>('cookieName');
   }

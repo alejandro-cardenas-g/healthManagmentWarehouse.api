@@ -25,7 +25,7 @@ import { JwtAuthGuard, PermissionGuard } from './guards';
 import {
   PermissionRepository,
   UserPermissionRepository,
-  UserRepository,
+  UserAuthRepository,
 } from './repositories';
 import { AuthService, PermissionService, UserService } from './services';
 import { TokenService } from './services/token.service';
@@ -37,7 +37,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     JwtAuthGuard,
     PermissionGuard,
     JwtStrategy,
-    UserRepository,
+    UserAuthRepository,
     UserPermissionRepository,
     PermissionRepository,
     AuthService,

@@ -3,13 +3,13 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IAuthUser, IJwtPayload } from '../interfaces';
-import { PermissionRepository, UserRepository } from '../repositories';
+import { PermissionRepository, UserAuthRepository } from '../repositories';
 import { TokenService } from '../services/token.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UserAuthRepository,
     private readonly permissionRepository: PermissionRepository,
     private readonly configService: ConfigService,
   ) {

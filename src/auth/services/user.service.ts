@@ -8,13 +8,13 @@ import { FindOptionsSelect } from 'typeorm';
 import { pick } from 'lodash';
 import { CreateUserDto } from '../dto';
 import { User } from '../entities';
-import { UserRepository } from '../repositories';
+import { UserAuthRepository } from '../repositories';
 import { PermissionService } from './permission.service';
 
 @Injectable()
 export class UserService {
   constructor(
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UserAuthRepository,
     private readonly permissionService: PermissionService,
   ) {}
 
@@ -26,9 +26,10 @@ export class UserService {
       templatePermissionId,
       ...restUser
     } = createUserDto;
+    const userEmail = email.toLowerCase();
     const encryptedPassword = hashSync(password, 10);
     let user = await this.userRepository.findOne({
-      where: { email },
+      where: { email: userEmail },
       select: { companyId: true, id: true },
     });
     if (user) {
@@ -40,7 +41,7 @@ export class UserService {
     }
     const userToCreate = this.userRepository.create({
       ...restUser,
-      email,
+      email: userEmail,
       password: encryptedPassword,
       companyId: creator.companyId,
     });
